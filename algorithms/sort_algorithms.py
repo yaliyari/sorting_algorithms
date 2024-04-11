@@ -20,6 +20,17 @@ def insertion_sort(array):
 
 
 def bubble_sort(array):
+    n = len(array)
+    if n <= 1:
+        return array  # array of length 0 or 1 is already sorted
+    for i in range(0, n):
+        swap_flag = False
+        for j in range(0, n-i-1):
+            if array[j] > array[j+1]:
+                array[j], array[j+1] = array[j+1], array[j]
+                swap_flag = True
+        if  not swap_flag:
+            break
     return array
 
 

@@ -1,7 +1,14 @@
 import pandas as pd
 import numpy as np
 import os
+import random
 """ A simple implementation of the Insertion sort"""
+
+def gen_list():
+    # n is length of list
+    n = 10
+    rand_list = [random.randint(0,100) for _ in range(n)]
+    return rand_list
 
 
 def insertion_sort(array):
@@ -29,10 +36,35 @@ def bubble_sort(array):
             if array[j] > array[j+1]:
                 array[j], array[j+1] = array[j+1], array[j]
                 swap_flag = True
-        if  not swap_flag:
+        if not swap_flag:
             break
     return array
 
 
 def merge_sort(array):
-    return array
+    if len(array) <= 1:
+        return array
+    mid = len(array)//2
+    left = merge_sort(array[0:mid])
+    right = merge_sort(array[mid:])
+    return merge(left, right)
+
+
+def merge(left, right):
+    i = 0
+    j = 0
+    merged = []
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            merged.append(left[i])
+            i += 1
+        else:
+            merged.append(right[j])
+            j += 1
+    while i < len(left):
+        merged.append(left[i])
+        i += 1
+    while j < len(right):
+        merged.append(right[j])
+        j += 1
+    return merged
